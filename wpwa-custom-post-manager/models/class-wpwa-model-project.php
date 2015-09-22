@@ -41,6 +41,7 @@ class WPWA_Model_Project {
         add_filter( 'post_updated_messages', array( $this, 'generate_project_messages' ) );
 
         add_action( 'p2p_init', array( $this, 'join_projects_to_services' ) );
+
     }
 
 
@@ -84,6 +85,7 @@ class WPWA_Model_Project {
                 'can_export'            => true,
                 'rewrite'               => true,
                 'capability_type'       => 'post',
+
 
         );
 
