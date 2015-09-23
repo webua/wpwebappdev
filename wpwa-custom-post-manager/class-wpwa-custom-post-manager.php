@@ -11,18 +11,16 @@
 
 spl_autoload_register('wpwa_autoloader');
 
+$base_path = plugin_dir_path(__FILE__);
+require_once $base_path.'/twig/lib/Twig/Autoloader.php';
+Twig_Autoloader::register();
+
 /*
 * Custom autoloader for the application
 *
 * @param  string Class name
 * @return -
 */
-
-$base_path = plugin_dir_path(__FILE__);
-require_once $base_path.'/twig/lib/Twig/Autoloader.php';
-Twig_Autoloader::register();
-
-
 function wpwa_autoloader( $class_name ) {
 
     $class_components = explode( "_", $class_name );
@@ -49,7 +47,7 @@ function wpwa_autoloader( $class_name ) {
                 break;
 
         }
-    }
+    } 
 }
 
 /*

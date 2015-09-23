@@ -6,3 +6,6 @@
 !wpwa_database_manager
 !wpwa-custom-post-manager
 !wpwa-user-manager
+!wpwa-ajax
+!wpwa-file-uploader
+!wpwa-pluggable-plugin

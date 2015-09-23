@@ -4,7 +4,7 @@
  * Manage developer projects throughout the portfolio
  * application.
  *
-*/
+ */
 
 class WPWA_Model_Project {
 
@@ -13,7 +13,7 @@ class WPWA_Model_Project {
     private $technology_taxonomy;
     private $project_type_taxonomy;
     private $error_message;
-
+    
 
     /*
      * Execute initiamizations for the projects
@@ -41,7 +41,6 @@ class WPWA_Model_Project {
         add_filter( 'post_updated_messages', array( $this, 'generate_project_messages' ) );
 
         add_action( 'p2p_init', array( $this, 'join_projects_to_services' ) );
-
     }
 
 
@@ -54,38 +53,37 @@ class WPWA_Model_Project {
     public function create_projects_post_type() {
 
         $labels = array(
-                'name'                  => __( 'Projects', 'wpwa' ),
-                'singular_name'         => __( 'Project', 'wpwa' ),
-                'add_new'               => __( 'Add New', 'wpwa' ),
-                'add_new_item'          => __( 'Add New Project', 'wpwa' ),
-                'edit_item'             => __( 'Edit Project', 'wpwa' ),
-                'new_item'              => __( 'New Project', 'wpwa' ),
-                'all_items'             => __( 'All Projects', 'wpwa' ),
-                'view_item'             => __( 'View Project', 'wpwa' ),
-                'search_items'          => __( 'Search Projects', 'wpwa' ),
-                'not_found'             => __( 'No projects found', 'wpwa' ),
-                'not_found_in_trash'    => __( 'No projects found in the Trash', 'wpwa' ),
-                'parent_item_colon'     => '',
-                'menu_name'             => __( 'Projects', 'wpwa' )
+            'name'                  => __( 'Projects', 'wpwa' ),
+            'singular_name'         => __( 'Project', 'wpwa' ),
+            'add_new'               => __( 'Add New', 'wpwa' ),
+            'add_new_item'          => __( 'Add New Project', 'wpwa' ),
+            'edit_item'             => __( 'Edit Project', 'wpwa' ),
+            'new_item'              => __( 'New Project', 'wpwa' ),
+            'all_items'             => __( 'All Projects', 'wpwa' ),
+            'view_item'             => __( 'View Project', 'wpwa' ),
+            'search_items'          => __( 'Search Projects', 'wpwa' ),
+            'not_found'             => __( 'No projects found', 'wpwa' ),
+            'not_found_in_trash'    => __( 'No projects found in the Trash', 'wpwa' ),
+            'parent_item_colon'     => '',
+            'menu_name'             => __( 'Projects', 'wpwa' )
         );
 
         $args = array(
-                'labels'                => $labels,
-                'hierarchical'          => true,
-                'description'           => 'Projects',
-                'supports'              => array('title', 'editor'),
-                'public'                => true,
-                'show_ui'               => true,
-                'show_in_menu'          => true,
-                'show_in_nav_menus'     => true,
-                'publicly_queryable'    => true,
-                'exclude_from_search'   => false,
-                'has_archive'           => true,
-                'query_var'             => true,
-                'can_export'            => true,
-                'rewrite'               => true,
-                'capability_type'       => 'post',
-
+            'labels'                => $labels,
+            'hierarchical'          => true,
+            'description'           => 'Projects',
+            'supports'              => array('title', 'editor'),
+            'public'                => true,
+            'show_ui'               => true,
+            'show_in_menu'          => true,
+            'show_in_nav_menus'     => true,
+            'publicly_queryable'    => true,
+            'exclude_from_search'   => false,
+            'has_archive'           => true,
+            'query_var'             => true,
+            'can_export'            => true,
+            'rewrite'               => true,
+            'capability_type'       => 'post',
 
         );
 
@@ -104,7 +102,7 @@ class WPWA_Model_Project {
                 $this->technology_taxonomy,
                 $this->post_type,
                 array(
-                'labels' => array(
+                    'labels' => array(
                         'name'              => __( 'Technology', 'wpwa' ),
                         'singular_name'     => __( 'Technology', 'wpwa' ),
                         'search_items'      => __( 'Search Technology', 'wpwa' ),
@@ -116,8 +114,8 @@ class WPWA_Model_Project {
                         'add_new_item'      => __( 'Add New Technology', 'wpwa' ),
                         'new_item_name'     => __( 'New Technology Name', 'wpwa' ),
                         'menu_name'         => __( 'Technology', 'wpwa' ),
-                ),
-                'hierarchical' => true
+                    ),
+                    'hierarchical' => true
                 )
         );
 
@@ -125,7 +123,7 @@ class WPWA_Model_Project {
                 $this->project_type_taxonomy,
                 $this->post_type,
                 array(
-                'labels' => array(
+                    'labels' => array(
                         'name'              => __( 'Project Type', 'wpwa' ),
                         'singular_name'     => __( 'Project Type', 'wpwa' ),
                         'search_items'      => __( 'Search Project Type', 'wpwa' ),
@@ -137,14 +135,14 @@ class WPWA_Model_Project {
                         'add_new_item'      => __( 'Add New Project Type', 'wpwa' ),
                         'new_item_name'     => __( 'New Project Type Name', 'wpwa' ),
                         'menu_name'         => __( 'Project Type', 'wpwa' ),
-                ),
-                'hierarchical' => true,
-                'capabilities' => array(
+                    ),
+                    'hierarchical' => true,
+                    'capabilities' => array(
                         'manage_terms'      => 'manage_project_type',
                         'edit_terms'        => 'edit_project_type',
                         'delete_terms'      => 'delete_project_type',
                         'assign_terms'      => 'assign_project_type'
-                ),
+                    ),
                 )
         );
     }
@@ -165,24 +163,26 @@ class WPWA_Model_Project {
      * @param  -
      * @return -  
     */
-public function display_projects_meta_boxes() {
+    public function display_projects_meta_boxes() {
 
-    global $post;
+        global $post;
 
-    $data = array();
+        $data = array();
 
-    // Get the exisitng values from database
-    $data['project_meta_nonce']     = wp_create_nonce("wpwa-project-meta");
-    $data['project_url']            = esc_url(get_post_meta( $post->ID, "_wpwa_project_url", true ));
-    $data['project_duration']       = esc_attr(get_post_meta( $post->ID, "_wpwa_project_duration", true ));
-    $data['project_download_url']   = esc_attr(get_post_meta( $post->ID, "_wpwa_project_download_url", true ));
-    $data['project_status']         = esc_attr(get_post_meta( $post->ID, "_wpwa_project_status", true ));
+        // Get the exisitng values from database
+        $data['project_meta_nonce']     = wp_create_nonce("wpwa-project-meta");
+        $data['project_url']            = esc_url(get_post_meta( $post->ID, "_wpwa_project_url", true ));
+        $data['project_duration']       = esc_attr(get_post_meta( $post->ID, "_wpwa_project_duration", true ));
+        $data['project_download_url']   = esc_attr(get_post_meta( $post->ID, "_wpwa_project_download_url", true ));
+        $data['project_status']         = esc_attr(get_post_meta( $post->ID, "_wpwa_project_status", true ));
 
-    // Render the twig template by passing the form data
-    echo $this->template_parser->render( 'project_meta.html', $data );
-}
+        $data['project_screens']        = json_decode(get_post_meta($post->ID, "_wpwa_project_screens", true));
 
-    /*
+        // Render the twig template by passing the form data
+        echo $this->template_parser->render( 'project_meta.html', $data );
+    }
+
+     /*
      * Save project custom fields to database with neccessary validations
      *
      * @param  -  WordPress generated default messages list
@@ -236,7 +236,7 @@ public function display_projects_meta_boxes() {
                 // Set the error message and temporarly save in the database.
                 $this->error_message = __('Project creation failed.<br/>', 'wpwa' ) . $this->error_message;
                 set_transient( "project_error_message_$post->ID", $this->error_message, 60 * 10 );
-
+                
             } else {
 
                 // Update the custom field values upon successfull validation
@@ -244,6 +244,10 @@ public function display_projects_meta_boxes() {
                 update_post_meta( $post->ID, "_wpwa_project_duration", $project_duration );
                 update_post_meta( $post->ID, "_wpwa_project_download_url", $project_download_url );
                 update_post_meta( $post->ID, "_wpwa_project_status", $project_status );
+
+                $project_screens = isset ($_POST['h_project_screens']) ? $_POST['h_project_screens'] : "";
+                $project_screens = json_encode($project_screens);
+                update_post_meta($post->ID, "_wpwa_project_screens", $project_screens);
             }
         } else {
             return $post->ID;
@@ -275,18 +279,18 @@ public function display_projects_meta_boxes() {
 
             // Customize the messages list for Projects
             $messages[$this->post_type] = array(
-                    0 => '', // Unused. Messages start at index 1.
-                    1 => sprintf(__('Project updated. <a href="%s">View Project</a>', 'wpwa' ), esc_url(get_permalink($post_ID))),
-                    2 => __('Custom field updated.', 'wpwa' ),
-                    3 => __('Custom field deleted.', 'wpwa' ),
-                    4 => __('Project updated.', 'wpwa' ),
-                    5 => isset($_GET['revision']) ? sprintf(__('Project restored to revision from %s', 'wpwa' ), wp_post_revision_title((int) $_GET['revision'], false)) : false,
-                    6 => sprintf(__('Project published. <a href="%s">View Project</a>', 'wpwa' ), esc_url(get_permalink($post_ID))),
-                    7 => __('Project saved.', 'wpwa' ),
-                    8 => sprintf(__('Project submitted. <a target="_blank" href="%s">Preview Project</a>', 'wpwa' ), esc_url(add_query_arg('preview', 'true', get_permalink($post_ID)))),
-                    9 => sprintf(__('Project scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview Project</a>', 'wpwa' ),
-                    date_i18n(__('M j, Y @ G:i'), strtotime($post->post_date)), esc_url(get_permalink($post_ID))),
-                    10 => sprintf(__('Project draft updated. <a target="_blank" href="%s">Preview Project</a>', 'wpwa' ), esc_url(add_query_arg('preview', 'true', get_permalink($post_ID)))),
+                0 => '', // Unused. Messages start at index 1.
+                1 => sprintf(__('Project updated. <a href="%s">View Project</a>', 'wpwa' ), esc_url(get_permalink($post_ID))),
+                2 => __('Custom field updated.', 'wpwa' ),
+                3 => __('Custom field deleted.', 'wpwa' ),
+                4 => __('Project updated.', 'wpwa' ),
+                5 => isset($_GET['revision']) ? sprintf(__('Project restored to revision from %s', 'wpwa' ), wp_post_revision_title((int) $_GET['revision'], false)) : false,
+                6 => sprintf(__('Project published. <a href="%s">View Project</a>', 'wpwa' ), esc_url(get_permalink($post_ID))),
+                7 => __('Project saved.', 'wpwa' ),
+                8 => sprintf(__('Project submitted. <a target="_blank" href="%s">Preview Project</a>', 'wpwa' ), esc_url(add_query_arg('preview', 'true', get_permalink($post_ID)))),
+                9 => sprintf(__('Project scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview Project</a>', 'wpwa' ),
+                        date_i18n(__('M j, Y @ G:i'), strtotime($post->post_date)), esc_url(get_permalink($post_ID))),
+                10 => sprintf(__('Project draft updated. <a target="_blank" href="%s">Preview Project</a>', 'wpwa' ), esc_url(add_query_arg('preview', 'true', get_permalink($post_ID)))),
             );
         }
 
@@ -301,15 +305,15 @@ public function display_projects_meta_boxes() {
      * @param  -
      * @return -
     */
-    public function join_projects_to_services() {
+    public function join_projects_to_services(){
 
-        p2p_register_connection_type( array(
-                'name'  => 'projects_to_services',
-                'from'  => $this->post_type,
-                'to'    => 'wpwa_service'
-                ) );
+	p2p_register_connection_type( array(
+		'name'  => 'projects_to_services',
+		'from'  => $this->post_type,
+		'to'    => 'wpwa_service'
+	) );
 
     }
-    
+
 }
 ?>

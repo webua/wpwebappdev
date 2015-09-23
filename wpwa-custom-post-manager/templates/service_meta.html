@@ -5,9 +5,9 @@
         <th style=''><label for='Service availability'>Service availability *</label></th>
         <td>
             <select class='widefat' name="service_availability" id="service_availability">
-                <option {% if service_availability == 0 %}selected{% endif %} value="0">Select</option>
-                <option {% if service_availability == 'av' %}selected{% endif %} value="av">Available</option>
-                <option {% if service_availability == 'nav' %}selected{% endif %} value="nav">Not available</option>
+                <option {% if service_price_type == 0 %}selected{% endif %} value="0">Select</option>
+                <option {% if service_price_type == 'av' %}selected{% endif %} value="av">Available</option>
+                <option {% if service_price_type == 'nav' %}selected{% endif %} value="nav">Not available</option>
             </select>
         </td>
     </tr>

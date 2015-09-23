@@ -27,5 +27,15 @@
         <th style=''><label for='Download URL'>Download URL</label></th>
         <td><input class='widefat' name='txt_download_url' id='txt_download_url' type='text'  value='{{ project_download_url }}' /></td>
     </tr>
-    
+     <tr>
+        <th style=''><label for='Project Screens'>Project Screens</label></th>
+        <td><input class='widefat wpwa_multi_file' type="file" id="project_screens"  />
+            <div class='wpwa_preview_box' id='project_screens_panel' >
+                {% for item in project_screens %}
+                <img class='wpwa_img_prev' style='with:75px;height:75px' src='{{item}}' />
+                <input class='wpwa_img_prev_hidden' type='hidden' name='h_project_screens[]' value='{{item}}' />
+                {% endfor %}
+            </div>
+        </td>
+    </tr>
 </table>
